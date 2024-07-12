@@ -1,0 +1,88 @@
+input {
+  outline: none;
+  padding: 8px 12px;
+  box-shadow: rgba(0, 0, 0, 0.035) 0px 1px 2px 0px;
+  display: flex;
+  align-items: center;
+  color: rgb(50, 50, 50);
+  font-family: inherit;
+  font-size: 14px;
+  height: 20px;
+  width: 200px;
+  display: block;
+  border: 1px solid rgb(195, 195, 195);
+  border-radius: 8px;
+}
+input::placeholder {
+  color: rgb(220, 220, 220);
+  font-style: italic;
+}
+input:focus {
+  border: 1px solid rgb(33, 67, 84);
+}
+.delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(233, 35, 35);
+  border-radius: 4px;
+  background-color: rgb(233, 35, 35);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+.done-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(33, 67, 84);
+  border-radius: 4px;
+  background-color: rgb(33, 67, 84);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+.button-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.container {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.input-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.drop-down-holder {
+  display: flex;
+  justify-content: center;
+}
+.drop-down {
+  width: 250px;
+  height: 40px;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  box-shadow: rgba(0, 0, 0, 0.035) 0px 1px 2px 0px;
+  border: 1px solid rgb(33, 67, 84);
+  background-color: white;
+  border-radius: 8px;
+  color: rgb(33, 67, 84);
+  appearance: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}

@@ -1,0 +1,89 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 600px;
+  border-radius: 8px;
+  overflow: scroll;
+  padding: 14px;
+  box-sizing: border-box;
+}
+.search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+.search-container-input input {
+  outline: none;
+  padding: 8px 12px;
+  box-shadow: rgba(0, 0, 0, 0.035) 0px 1px 2px 0px;
+  display: flex;
+  align-items: center;
+  color: rgb(50, 50, 50);
+  font-family: inherit;
+  font-size: 14px;
+  height: 20px;
+  width: 200px;
+  display: block;
+  border: 1px solid rgb(195, 195, 195);
+  border-radius: 8px;
+}
+.search-container-input input::placeholder {
+  color: rgb(220, 220, 220);
+  font-style: italic;
+}
+.search-container-input input:focus {
+  border: 1px solid rgb(33, 67, 84);
+}
+.add-button {
+  border-radius: 6px;
+  border: 1px solid #32de84;
+  padding: 8px 14px;
+  cursor: pointer;
+  color: #32de84;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.delete-button {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(233, 35, 35);
+  border-radius: 4px;
+  color: rgb(233, 35, 35);
+  cursor: pointer;
+}
+.edit-button {
+  border: 1px solid rgb(233, 160, 25);
+  color: rgb(233, 160, 25);
+  padding: 3px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}

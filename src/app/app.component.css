@@ -1,0 +1,76 @@
+.main-frame {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+}
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.top-bar {
+  width: 100%;
+  height: 10%;
+  border-bottom: 1px solid rgb(224, 224, 224);
+  display: flex;
+  flex-direction: row;
+  padding: 0px 22px;
+  box-sizing: border-box;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+.inventory {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 44px);
+  height: calc(90% - 64px);
+  padding: 32px 22px;
+  background-color: rgb(240, 240, 240);
+  gap: 22px;
+}
+.inventory-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50px;
+  align-items: center;
+}
+.inventory-header-toggle {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+.inventory-header-toggle div.active {
+  color: rgb(50, 50, 50);
+  font-weight: 600;
+}
+.button-primary {
+  padding: 11px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(33, 67, 84);
+  color: rgb(33, 67, 84);
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 14px;
+  gap: 4px;
+}
+.button-secondary {
+  padding: 11px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(33, 67, 84);
+  color: white;
+  border-radius: 8px;
+  background-color: rgb(33, 67, 84);
+  cursor: pointer;
+  font-size: 14px;
+  gap: 4px;
+}

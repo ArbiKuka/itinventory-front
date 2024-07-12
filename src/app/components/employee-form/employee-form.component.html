@@ -1,0 +1,27 @@
+<div class="container">
+  <span style="color: rgb(37, 67, 84); font-weight: 600">{{
+    employee ? "Update Employee" : "Add Employee"
+  }}</span>
+  <form (ngSubmit)="onSubmit()" class="form-container">
+    <div class="input-holder">
+      <input
+        matInput
+        placeholder="Full name"
+        [(ngModel)]="newEmployee.name"
+        name="name"
+        required
+      />
+      <input
+        matInput
+        placeholder="Email"
+        [(ngModel)]="newEmployee.email"
+        name="email"
+        required
+      />
+    </div>
+    <div class="button-holder">
+      <button (click)="onNoClick()" class="delete-button">Cancel</button>
+      <button type="submit" class="done-button">Submit</button>
+    </div>
+  </form>
+</div>

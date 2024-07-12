@@ -1,0 +1,88 @@
+<div class="main-frame">
+  <app-side-bar style="height: 100%"></app-side-bar>
+  <div class="right-panel">
+    <div class="top-bar">
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 6px;
+        "
+      >
+        <app-bell-svg />
+      </div>
+      <div
+        style="height: 36px; width: 1px; background-color: rgb(224, 224, 224)"
+      ></div>
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 6px;
+        "
+      >
+        <div
+          style="
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgb(33, 67, 84);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          P
+        </div>
+        <span>Arbi Kuka</span>
+      </div>
+    </div>
+    <div class="inventory">
+      <div class="inventory-header">
+        <div class="inventory-header-toggle">
+          <span style="font-size: 22px; font-weight: 600">Inventory</span>
+          <div
+            style="
+              font-size: 14px;
+              color: rgb(109, 111, 115);
+              display: flex;
+              flex-direction: row;
+            "
+          >
+            <div
+              style="cursor: pointer"
+              (click)="toggleView('employees')"
+              [class.active]="view === 'employees'"
+            >
+              Employees
+            </div>
+            &nbsp;/&nbsp;
+            <div
+              style="cursor: pointer"
+              (click)="toggleView('devices')"
+              [class.active]="view === 'devices'"
+            >
+              Devices
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: row; gap: 22px">
+          <div class="button-primary">
+            <app-export-svg style="margin-top: 3px" /> Export Data
+          </div>
+          <div class="button-secondary">
+            <app-upload-svg style="margin-top: 3px" /> Upload Data
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="view === 'employees'">
+        <app-employee-list></app-employee-list>
+      </ng-container>
+      <ng-container *ngIf="view === 'devices'">
+        <app-device-list></app-device-list>
+      </ng-container>
+    </div>
+  </div>
+</div>
