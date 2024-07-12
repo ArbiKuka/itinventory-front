@@ -7,7 +7,7 @@ Frontend Instructions
 2. Install dependencies:<br>
    npm install
 
-3. Run the development server:
+3. Run the development server: <br>
    ng serve
 
 The frontend application should now be running on http://localhost:4200
