@@ -8,10 +8,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { Store } from '@ngrx/store';
 
 import { Device } from '../../models/device.model';
-import { DeviceService } from '../../services/device.service';
 import { DeviceFormComponent } from '../device-form/device-form.component';
+import * as DeviceActions from '../../store/device.actions';
+import { selectAllDevices } from '../../store/device.selectors';
 
 @Component({
   selector: 'app-device-list',
@@ -44,27 +46,13 @@ export class DeviceListComponent implements OnInit {
   isFormOpen = false;
   editingDevice: Device | null = null;
 
-  constructor(
-    private deviceService: DeviceService,
-    private cdr: ChangeDetectorRef
-  ) {
-    this.devices$ = this.deviceService.devices$;
+  constructor(private store: Store, private cdr: ChangeDetectorRef) {
+    this.devices$ = this.store.select(selectAllDevices);
     this.filteredDevices$ = this.devices$;
   }
 
   ngOnInit(): void {
-    this.loadDevices();
-  }
-
-  loadDevices(): void {
-    this.deviceService.getDevices().subscribe(
-      (devices) => {
-        this.devices$ = of(devices);
-        this.filterDevices();
-        this.cdr.detectChanges();
-      },
-      (error) => console.error('Error loading devices:', error)
-    );
+    this.store.dispatch(DeviceActions.loadDevices());
   }
 
   filterDevices(): void {
@@ -99,17 +87,13 @@ export class DeviceListComponent implements OnInit {
 
   addDevice(newDevice: Device): void {
     if (newDevice.type && newDevice.description) {
-      this.deviceService.addDevice(newDevice).subscribe(() => {
-        this.loadDevices();
-      });
+      this.store.dispatch(DeviceActions.addDevice({ device: newDevice }));
     }
   }
 
   updateDevice(updateDevice: Device): void {
     if (updateDevice.id !== undefined) {
-      this.deviceService.updateDevice(updateDevice).subscribe(() => {
-        this.loadDevices();
-      });
+      this.store.dispatch(DeviceActions.updateDevice({ device: updateDevice }));
     }
   }
 
@@ -118,8 +102,6 @@ export class DeviceListComponent implements OnInit {
   }
 
   deleteDevice(id: number): void {
-    this.deviceService.deleteDevice(id).subscribe(() => {
-      this.loadDevices();
-    });
+    this.store.dispatch(DeviceActions.deleteDevice({ id }));
   }
 }

@@ -1,18 +1,21 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Device } from '../../models/device.model';
 import { Employee } from '../../models/employee.model';
-import { EmployeeService } from '../../services/employee.service';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { Store } from '@ngrx/store';
+import * as EmployeeActions from '../../store/employee.actions';
+import { selectAllEmployees } from '../../store/employee.selectors';
+
 import { MatFormField } from '@angular/material/form-field';
-import { NgFor } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-device-form',
   templateUrl: './device-form.component.html',
   styleUrls: ['./device-form.component.css'],
   standalone: true,
-  imports: [FormsModule, NgIf, MatFormField, NgFor],
+  imports: [CommonModule, FormsModule, MatFormField],
 })
 export class DeviceFormComponent {
   @Input() device: Device | null = null;
@@ -24,21 +27,17 @@ export class DeviceFormComponent {
     employeeId: null,
   };
 
-  employees: Employee[] = [];
+  employees$: Observable<Employee[]>;
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private store: Store) {
+    this.employees$ = this.store.select(selectAllEmployees);
+  }
 
   ngOnInit(): void {
+    this.store.dispatch(EmployeeActions.loadEmployees());
     if (this.device) {
       this.newDevice = { ...this.device };
     }
-    this.loadEmployees();
-  }
-
-  loadEmployees(): void {
-    this.employeeService
-      .getEmployees()
-      .subscribe((employees) => (this.employees = employees));
   }
 
   ngOnChanges() {

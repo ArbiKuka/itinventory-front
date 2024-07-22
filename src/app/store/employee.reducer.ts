@@ -31,6 +31,27 @@ export const employeeReducer = createReducer(
   on(EmployeeActions.addEmployeeFailure, (state, { error }) => ({
     ...state,
     error: error,
+  })),
+  on(EmployeeActions.updateEmployeeSuccess, (state, { employee }) => ({
+    ...state,
+    employees: state.employees.map((emp) =>
+      emp.id === employee.id ? employee : emp
+    ),
+    error: null,
+  })),
+
+  on(EmployeeActions.updateEmployeeFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+  })),
+  on(EmployeeActions.deleteEmployeeSuccess, (state, { id }) => ({
+    ...state,
+    employees: state.employees.filter((emp) => emp.id !== id),
+    error: null,
+  })),
+  on(EmployeeActions.deleteEmployeeFailure, (state, { error }) => ({
+    ...state,
+    error: error,
   }))
 );
 

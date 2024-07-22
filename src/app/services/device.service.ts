@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Device } from '../models/device.model';
 
 @Injectable({
@@ -8,8 +8,6 @@ import { Device } from '../models/device.model';
 })
 export class DeviceService {
   private apiUrl = 'http://localhost:5193/api/devices';
-  private devicesSubject = new BehaviorSubject<Device[]>([]);
-  devices$ = this.devicesSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -22,8 +20,6 @@ export class DeviceService {
   }
 
   addDevice(device: Device): Observable<Device> {
-    console.log(device);
-    console.log('hi');
     return this.http.post<Device>(this.apiUrl, device);
   }
 
@@ -33,12 +29,5 @@ export class DeviceService {
 
   deleteDevice(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  assignDevice(deviceId: number, employeeId: number): Observable<Device> {
-    return this.http.put<Device>(
-      `${this.apiUrl}/${deviceId}/assign/${employeeId}`,
-      {}
-    );
   }
 }

@@ -8,10 +8,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { Store } from '@ngrx/store';
 
 import { Employee } from '../../models/employee.model';
-import { EmployeeService } from '../../services/employee.service';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
+import * as EmployeeActions from '../../store/employee.actions';
+import {
+  selectAllEmployees,
+  selectEmployeeCount,
+} from '../../store/employee.selectors';
 
 @Component({
   selector: 'app-employee-list',
@@ -37,23 +42,16 @@ export class EmployeeListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'devices', 'actions'];
   isFormOpen = false;
   editingEmployee: Employee | null = null;
+  employeeCount$: Observable<number>;
 
-  constructor(
-    private employeeService: EmployeeService,
-    private cdr: ChangeDetectorRef
-  ) {
-    this.employees$ = this.employeeService.employees$;
+  constructor(private store: Store, private cdr: ChangeDetectorRef) {
+    this.employees$ = this.store.select(selectAllEmployees);
     this.filteredEmployees$ = this.employees$;
+    this.employeeCount$ = this.store.select(selectEmployeeCount);
   }
 
   ngOnInit(): void {
-    this.loadEmployees();
-  }
-
-  loadEmployees(): void {
-    this.employeeService.getEmployees().subscribe(() => {
-      this.cdr.detectChanges();
-    });
+    this.store.dispatch(EmployeeActions.loadEmployees());
   }
 
   filterEmployees(): void {
@@ -86,29 +84,27 @@ export class EmployeeListComponent implements OnInit {
     }
   }
 
-  onNoClick(): void {
-    this.isFormOpen = false;
-  }
-
   addEmployee(newEmployee: Employee): void {
     if (newEmployee.name && newEmployee.email) {
-      this.employeeService.addEmployee(newEmployee).subscribe(() => {
-        this.loadEmployees();
-      });
+      this.store.dispatch(
+        EmployeeActions.addEmployee({ employee: newEmployee })
+      );
     }
   }
 
   updateEmployee(updatedEmployee: Employee): void {
     if (updatedEmployee.id !== undefined) {
-      this.employeeService.updateEmployee(updatedEmployee).subscribe(() => {
-        this.loadEmployees();
-      });
+      this.store.dispatch(
+        EmployeeActions.updateEmployee({ employee: updatedEmployee })
+      );
     }
   }
 
+  onNoClick(): void {
+    this.isFormOpen = false;
+  }
+
   deleteEmployee(id: number): void {
-    this.employeeService.deleteEmployee(id).subscribe(() => {
-      this.loadEmployees();
-    });
+    this.store.dispatch(EmployeeActions.deleteEmployee({ id }));
   }
 }

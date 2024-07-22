@@ -31,7 +31,10 @@
         class="drop-down"
       >
         <option [ngValue]="null" selected>Not assigned</option>
-        <option *ngFor="let employee of employees" [value]="employee.id">
+        <option
+          *ngFor="let employee of employees$ | async"
+          [value]="employee.id"
+        >
           {{ employee.name + " " + "(" + employee.id + ")" }}
         </option>
       </select>
